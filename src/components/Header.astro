@@ -1,0 +1,303 @@
+---
+import DarkModeToggle from './DarkModeToggle.astro';
+
+const navItems = [
+  { label: 'Mike', href: '#mike' },
+  { label: 'Work', href: '#work' },
+  { label: 'Delivery', href: '#delivery' },
+  { label: 'Brands', href: '#brands' },
+  { label: 'Contact', href: '#contact' },
+];
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="profile-badge">
+        <div class="profile-image" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="stick-figure" width="40" height="40">
+            <circle cx="32" cy="18" r="10" />
+            <line x1="32" y1="28" x2="32" y2="46" />
+            <line x1="22" y1="36" x2="42" y2="36" />
+            <line x1="32" y1="46" x2="24" y2="58" />
+            <line x1="32" y1="46" x2="40" y2="58" />
+          </svg>
+        </div>
+        <p class="profile-subcopy">
+          Track record of delivery in utilities, system integrations, mobile apps, device integrations, point of sale, enterprise&#8209;ready&nbsp;software.
+        </p>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <nav class="nav-desktop" aria-label="Main navigation">
+        <ul class="nav-list">
+          {navItems.map(({ label, href }) => (
+            <li>
+              <a class="nav-link" href={href}>{label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <DarkModeToggle />
+
+      <button
+        class="hamburger"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-menu" class="nav-mobile" aria-label="Mobile navigation">
+    <ul class="nav-mobile-list">
+      {navItems.map(({ label, href }) => (
+        <li>
+          <a class="nav-mobile-link" href={href}>{label}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<script>
+  function initMobileMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (!hamburger || !mobileMenu) return;
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', String(!isOpen));
+      mobileMenu.classList.toggle('is-open', !isOpen);
+      document.body.classList.toggle('menu-open', !isOpen);
+    });
+
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.remove('is-open');
+        document.body.classList.remove('menu-open');
+      });
+    });
+  }
+
+  initMobileMenu();
+  document.addEventListener('astro:after-swap', initMobileMenu);
+</script>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: var(--header-height);
+    background-color: var(--color-bg);
+    border-bottom: var(--border-sketch);
+    transition: background-color 0.3s ease;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 0 var(--space-lg);
+  }
+
+  /* --- Left: Profile badge --- */
+
+  .header-left {
+    flex-shrink: 0;
+  }
+
+  .profile-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .profile-image {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: var(--border-sketch);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .profile-image svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .profile-subcopy {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    max-width: 280px;
+    line-height: 1.35;
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .profile-subcopy {
+      display: block;
+    }
+  }
+
+  /* --- Right: Nav + toggle + hamburger --- */
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  /* Desktop nav */
+
+  .nav-desktop {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .nav-desktop {
+      display: block;
+    }
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    gap: var(--space-xs);
+  }
+
+  .nav-link {
+    display: block;
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    border-radius: var(--radius-sketch);
+    transition: color 0.2s ease, background-color 0.2s ease;
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    color: var(--color-accent);
+    background-color: var(--color-bg-alt);
+    text-decoration: none;
+  }
+
+  /* Hamburger (mobile only) */
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+    width: 38px;
+    height: 38px;
+  }
+
+  @media (min-width: 768px) {
+    .hamburger {
+      display: none;
+    }
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--color-text);
+    border-radius: 1px;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+    transform-origin: center;
+  }
+
+  .hamburger[aria-expanded='true'] .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger[aria-expanded='true'] .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger[aria-expanded='true'] .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile menu */
+
+  .nav-mobile {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background-color: var(--color-bg);
+    border-bottom: var(--border-sketch);
+    padding: var(--space-lg);
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 99;
+  }
+
+  .nav-mobile.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  @media (min-width: 768px) {
+    .nav-mobile {
+      display: none;
+    }
+  }
+
+  .nav-mobile-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .nav-mobile-link {
+    display: block;
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-size-lg);
+    color: var(--color-text);
+    border-radius: var(--radius-sketch);
+    transition: color 0.2s ease, background-color 0.2s ease;
+    text-decoration: none;
+  }
+
+  .nav-mobile-link:hover {
+    color: var(--color-accent);
+    background-color: var(--color-bg-alt);
+    text-decoration: none;
+  }
+
+  /* Prevent body scroll when menu is open */
+  :global(body.menu-open) {
+    overflow: hidden;
+  }
+</style>

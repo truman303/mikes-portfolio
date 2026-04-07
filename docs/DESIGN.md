@@ -66,3 +66,11 @@ The fixed header with 5 nav items plus a dark mode toggle needs to work on small
 - Whether the header should auto-hide on scroll-down and reappear on scroll-up
 
 **Decision**: TBD during Stage 2.
+
+---
+
+### 6. Contact Section + Footer (Stage 7) ✓
+
+Links to LinkedIn, GitHub, and Application Frameworks with a waving goodbye stick figure and site footer.
+
+**Decision**: Three sketch-style contact cards in a flex row, each featuring a hand-drawn SVG icon (two stick-figure people for LinkedIn, code brackets for GitHub, browser/dashboard for App Frameworks), the platform name in Architects Daughter, a short description, and a subtle arrow indicator. Cards use the established design system tokens (`--border-sketch`, `--shadow-sketch`, `--color-card-bg`) with slight per-card rotations (matching the Brands section aesthetic). Hover lifts the card, snaps rotation to 0deg, and shifts the box-shadow/border to accent color. Reuses the existing `WavingFigure.astro` component as a goodbye illustration below the cards. Minimal footer with a wavy SVG divider line and copyright. CSS-only — no GSAP needed. Responsive: cards stack vertically on mobile with rotations removed. `prefers-reduced-motion`: transitions disabled. All external links open in new tabs with `rel="noopener noreferrer"` and descriptive `aria-label` attributes.

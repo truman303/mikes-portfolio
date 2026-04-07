@@ -102,4 +102,3 @@ A list of links to my LinkedIn, GitHub and Application Frameworks websites.
 ## Typography
 
 Use the ArchitectsDaughter-Regular.ttf as the main font library (found in docs/typography/ folder).
-

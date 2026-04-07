@@ -1,0 +1,78 @@
+---
+interface Props {
+  title: string;
+  desc: string;
+  num: string;
+}
+
+const { title, desc, num } = Astro.props;
+---
+
+<article class="delivery-card">
+  <span class="card-num">{num}</span>
+  <div class="card-illustration">
+    <slot />
+  </div>
+  <h3 class="card-title">{title}</h3>
+  <p class="card-desc">{desc}</p>
+</article>
+
+<style>
+  .delivery-card {
+    width: 300px;
+    flex-shrink: 0;
+    background: var(--color-card-bg);
+    border: var(--border-sketch);
+    border-radius: var(--radius-sketch);
+    box-shadow: var(--shadow-sketch);
+    padding: var(--space-lg) var(--space-lg) calc(var(--space-lg) + var(--space-sm));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .delivery-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 3px 4px 0 var(--color-border);
+  }
+
+  .card-num {
+    font-size: var(--font-size-xs);
+    color: var(--color-accent);
+    letter-spacing: 0.15em;
+  }
+
+  .card-illustration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-sm) 0;
+  }
+
+  .card-illustration :global(svg) {
+    width: 100%;
+    max-width: 170px;
+    height: auto;
+  }
+
+  .card-title {
+    font-size: var(--font-size-lg);
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-top: var(--space-xs);
+  }
+
+  .card-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  @media (max-width: 768px) {
+    .delivery-card {
+      width: 100%;
+    }
+  }
+</style>

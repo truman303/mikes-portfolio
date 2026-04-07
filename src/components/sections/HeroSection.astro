@@ -1,53 +1,243 @@
 ---
+import WavingFigure from '../svg/figures/WavingFigure.astro';
+import CoffeeFigure from '../svg/figures/CoffeeFigure.astro';
+import DadFigure from '../svg/figures/DadFigure.astro';
+import CoderFigure from '../svg/figures/CoderFigure.astro';
+import ThinkerFigure from '../svg/figures/ThinkerFigure.astro';
+import RunnerFigure from '../svg/figures/RunnerFigure.astro';
+import BuilderFigure from '../svg/figures/BuilderFigure.astro';
+import GuitarFigure from '../svg/figures/GuitarFigure.astro';
 ---
 
 <section id="mike" class="section hero-section">
   <div class="container">
     <div class="hero-content">
-      <h1 class="hero-title">Hello, I'm <span class="hero-name">Mike Fellowes</span></h1>
+      <h1 class="hero-title">
+        <span class="hero-greeting">Hello, I'm</span>
+        <span class="hero-name">Mike Fellowes</span>
+      </h1>
+      <p class="hero-tagline">Developer, maker, dad &mdash; and a few other things&hellip;</p>
     </div>
-    <div class="hero-carousel" aria-label="Things that describe me">
-      <!-- Stick figure carousel will be populated in Stage 3 -->
-      <p class="placeholder-note">[ Stick figure carousel — Stage 3 ]</p>
+  </div>
+
+  <div class="carousel-wrapper" aria-label="Things that describe me">
+    <div class="carousel-track" id="hero-carousel-track">
+      <div class="figure-card figure-emphasized" data-figure="waving">
+        <div class="figure-svg"><WavingFigure /></div>
+        <span class="figure-label">People Person</span>
+      </div>
+      <div class="figure-card" data-figure="coffee">
+        <div class="figure-svg"><CoffeeFigure /></div>
+        <span class="figure-label">Coffee Lover</span>
+      </div>
+      <div class="figure-card figure-emphasized" data-figure="dad">
+        <div class="figure-svg figure-svg--wide"><DadFigure /></div>
+        <span class="figure-label">Dad</span>
+      </div>
+      <div class="figure-card" data-figure="coder">
+        <div class="figure-svg"><CoderFigure /></div>
+        <span class="figure-label">Coder</span>
+      </div>
+      <div class="figure-card figure-emphasized" data-figure="thinker">
+        <div class="figure-svg"><ThinkerFigure /></div>
+        <span class="figure-label">Thinker</span>
+      </div>
+      <div class="figure-card" data-figure="runner">
+        <div class="figure-svg"><RunnerFigure /></div>
+        <span class="figure-label">Runner</span>
+      </div>
+      <div class="figure-card figure-emphasized" data-figure="builder">
+        <div class="figure-svg"><BuilderFigure /></div>
+        <span class="figure-label">Builder</span>
+      </div>
+      <div class="figure-card" data-figure="guitar">
+        <div class="figure-svg figure-svg--wide"><GuitarFigure /></div>
+        <span class="figure-label">Guitar Player</span>
+      </div>
     </div>
   </div>
 </section>
 
+<script>
+  import '../../scripts/hero-carousel';
+</script>
+
 <style>
   .hero-section {
     display: flex;
-    align-items: flex-end;
-    padding-bottom: var(--space-2xl);
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    overflow: hidden;
   }
 
   .hero-content {
     position: relative;
     z-index: 2;
+    margin-bottom: var(--space-xl);
   }
 
   .hero-title {
     font-size: var(--font-size-hero);
-    line-height: 1.15;
+    line-height: 1.1;
     color: var(--color-text);
   }
 
-  .hero-name {
-    color: var(--color-accent);
+  .hero-greeting {
     display: block;
+    opacity: 0;
   }
 
-  .hero-carousel {
-    margin-top: var(--space-xl);
-    overflow: hidden;
-    position: relative;
+  .hero-name {
+    display: block;
+    color: var(--color-accent);
+    opacity: 0;
   }
 
-  .placeholder-note {
+  .hero-tagline {
+    font-size: var(--font-size-lg);
     color: var(--color-text-muted);
-    font-size: var(--font-size-sm);
-    padding: var(--space-lg);
-    border: 1px dashed var(--color-text-muted);
-    border-radius: var(--radius-sketch);
+    margin-top: var(--space-md);
+    opacity: 0;
+  }
+
+  /* --- Carousel --- */
+
+  .carousel-wrapper {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    overflow: hidden;
+    padding: var(--space-lg) 0 var(--space-md);
+    opacity: 0;
+  }
+
+  .carousel-wrapper::before,
+  .carousel-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .carousel-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--color-bg), transparent);
+  }
+
+  .carousel-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--color-bg), transparent);
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: var(--space-lg);
+    will-change: transform;
+  }
+
+  /* --- Figure cards --- */
+
+  .figure-card {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-md) var(--space-sm);
+    cursor: default;
+    user-select: none;
+    transition: transform 0.25s ease;
+  }
+
+  .figure-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .figure-svg {
+    width: 80px;
+    height: 110px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .figure-svg :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .figure-svg--wide {
+    width: 105px;
+  }
+
+  .figure-emphasized .figure-svg {
+    width: 100px;
+    height: 140px;
+  }
+
+  .figure-emphasized .figure-svg--wide {
+    width: 130px;
+  }
+
+  .figure-label {
+    margin-top: var(--space-sm);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
     text-align: center;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  .figure-emphasized .figure-label {
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+  }
+
+  /* --- Sketch divider between hero text and carousel --- */
+
+  .hero-content::after {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 2px;
+    margin-top: var(--space-lg);
+    background: var(--color-border);
+    opacity: 0.3;
+    border-radius: 1px;
+  }
+
+  @media (max-width: 600px) {
+    .hero-section {
+      padding-top: var(--space-xl);
+      min-height: auto;
+    }
+
+    .figure-svg {
+      width: 60px;
+      height: 84px;
+    }
+
+    .figure-svg--wide {
+      width: 80px;
+    }
+
+    .figure-emphasized .figure-svg {
+      width: 76px;
+      height: 106px;
+    }
+
+    .figure-emphasized .figure-svg--wide {
+      width: 100px;
+    }
+
+    .carousel-wrapper::before,
+    .carousel-wrapper::after {
+      width: 40px;
+    }
   }
 </style>

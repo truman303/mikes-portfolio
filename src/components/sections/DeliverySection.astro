@@ -317,8 +317,15 @@ import DeliveryCard from '../DeliveryCard.astro';
     display: flex;
     align-items: center;
     gap: var(--space-lg);
-    padding: var(--space-md) var(--space-xl);
+    padding: var(--space-md) 0 var(--space-md) var(--space-xl);
     min-height: 0;
+  }
+
+  .delivery-track::after {
+    content: '';
+    flex-shrink: 0;
+    width: var(--space-xl);
+    min-height: 1px;
   }
 
   /* --- Mobile fallback --- */
@@ -340,6 +347,10 @@ import DeliveryCard from '../DeliveryCard.astro';
       gap: var(--space-lg);
     }
 
+    .delivery-track::after {
+      display: none;
+    }
+
     .delivery-header::after {
       margin-left: 0;
     }
@@ -358,6 +369,10 @@ import DeliveryCard from '../DeliveryCard.astro';
       justify-content: center;
       padding: var(--space-lg);
       gap: var(--space-lg);
+    }
+
+    .delivery-track::after {
+      display: none;
     }
   }
 </style>

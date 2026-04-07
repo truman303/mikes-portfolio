@@ -3,6 +3,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const LEAD_IN = 0.12;
+
 function initDeliveryScroll() {
   const section = document.querySelector('.delivery-section') as HTMLElement;
   const track = document.querySelector('.delivery-track') as HTMLElement;
@@ -23,18 +25,26 @@ function initDeliveryScroll() {
 
       const getScrollDistance = () => track.scrollWidth - window.innerWidth;
 
-      const scrollTween = gsap.to(track, {
-        x: () => -getScrollDistance(),
-        ease: 'none',
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: () => '+=' + getScrollDistance(),
+          end: () => '+=' + getScrollDistance() / (1 - LEAD_IN),
           pin: true,
           scrub: 0.5,
           invalidateOnRefresh: true,
         },
       });
+
+      tl.to(
+        track,
+        {
+          x: () => -getScrollDistance(),
+          ease: 'none',
+          duration: 1 - LEAD_IN,
+        },
+        LEAD_IN,
+      );
 
       const cards = gsap.utils.toArray<HTMLElement>('.delivery-card');
       cards.forEach((card, i) => {
@@ -45,7 +55,7 @@ function initDeliveryScroll() {
           immediateRender: false,
           scrollTrigger: {
             trigger: card,
-            containerAnimation: scrollTween,
+            containerAnimation: tl,
             start: 'left 90%',
             end: 'left 60%',
             scrub: true,

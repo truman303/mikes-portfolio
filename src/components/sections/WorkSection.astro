@@ -1,24 +1,313 @@
 ---
+import UtilitiesScene from '../svg/scenes/UtilitiesScene.astro';
+import PaymentsScene from '../svg/scenes/PaymentsScene.astro';
+import ITManagementScene from '../svg/scenes/ITManagementScene.astro';
+import DefenseScene from '../svg/scenes/DefenseScene.astro';
+import AgentSkillsScene from '../svg/scenes/AgentSkillsScene.astro';
+
+const domains = [
+  {
+    id: 'utilities',
+    num: '01',
+    title: 'Utilities',
+    desc: 'Electricity, water & gas metering — prepayment platforms, system integrations, and the infrastructure that connects them all.',
+  },
+  {
+    id: 'payments',
+    num: '02',
+    title: 'Payments',
+    desc: 'Point-of-sale terminals, NFC contactless, prepayment & smart card systems — making every transaction seamless.',
+  },
+  {
+    id: 'it-management',
+    num: '03',
+    title: 'IT Management',
+    desc: 'Enterprise platforms, customer portals, agent harnesses & the tools that keep distributed teams productive.',
+  },
+  {
+    id: 'defense',
+    num: '04',
+    title: 'Defense & Radio',
+    desc: 'Radio spectrum management, electronic warfare systems & licensing infrastructure — securing the airwaves.',
+  },
+  {
+    id: 'agent-skills',
+    num: '05',
+    title: 'Agent Skills',
+    desc: 'Open-source AI agent skills — hand-crafted tools built to help developers and teams work smarter.',
+  },
+];
 ---
 
 <section id="work" class="section work-section">
-  <div class="container">
-    <h2 class="section-title">Work</h2>
-    <p class="placeholder-note">[ Scroll-pinned domain subsections — Stage 4 ]</p>
+  <div class="work-pinned">
+    <div class="work-header">
+      <div class="container">
+        <h2 class="section-title work-title">Work</h2>
+        <div class="work-progress" aria-hidden="true">
+          {domains.map((_, i) => (
+            <span class="work-progress-dot" data-index={i} />
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="work-stage container">
+      <div class="work-domain" data-domain="utilities">
+        <div class="domain-title-wrap">
+          <span class="domain-num">{domains[0].num}</span>
+          <h3 class="domain-heading">{domains[0].title}</h3>
+          <p class="domain-desc">{domains[0].desc}</p>
+        </div>
+        <div class="domain-scene">
+          <UtilitiesScene />
+        </div>
+      </div>
+
+      <div class="work-domain" data-domain="payments">
+        <div class="domain-title-wrap">
+          <span class="domain-num">{domains[1].num}</span>
+          <h3 class="domain-heading">{domains[1].title}</h3>
+          <p class="domain-desc">{domains[1].desc}</p>
+        </div>
+        <div class="domain-scene">
+          <PaymentsScene />
+        </div>
+      </div>
+
+      <div class="work-domain" data-domain="it-management">
+        <div class="domain-title-wrap">
+          <span class="domain-num">{domains[2].num}</span>
+          <h3 class="domain-heading">{domains[2].title}</h3>
+          <p class="domain-desc">{domains[2].desc}</p>
+        </div>
+        <div class="domain-scene">
+          <ITManagementScene />
+        </div>
+      </div>
+
+      <div class="work-domain" data-domain="defense">
+        <div class="domain-title-wrap">
+          <span class="domain-num">{domains[3].num}</span>
+          <h3 class="domain-heading">{domains[3].title}</h3>
+          <p class="domain-desc">{domains[3].desc}</p>
+        </div>
+        <div class="domain-scene">
+          <DefenseScene />
+        </div>
+      </div>
+
+      <div class="work-domain" data-domain="agent-skills">
+        <div class="domain-title-wrap">
+          <span class="domain-num">{domains[4].num}</span>
+          <h3 class="domain-heading">{domains[4].title}</h3>
+          <p class="domain-desc">{domains[4].desc}</p>
+        </div>
+        <div class="domain-scene">
+          <AgentSkillsScene />
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
+<script>
+  import '../../scripts/work-scroll';
+</script>
+
 <style>
   .work-section {
+    position: relative;
+    padding: 0;
+    min-height: auto;
     background-color: var(--color-bg-alt);
   }
 
-  .placeholder-note {
-    color: var(--color-text-muted);
-    font-size: var(--font-size-sm);
+  .work-pinned {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* --- Header row --- */
+
+  .work-header {
+    padding-top: calc(var(--header-height) + var(--space-lg));
+    padding-bottom: var(--space-sm);
+    flex-shrink: 0;
+  }
+
+  .work-header .container {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .work-title {
+    margin-bottom: 0;
+  }
+
+  /* --- Progress dots --- */
+
+  .work-progress {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+  }
+
+  .work-progress-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-text-muted);
+    background: transparent;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .work-progress-dot:global(.is-active) {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    transform: scale(1.35);
+  }
+
+  /* --- Stage area --- */
+
+  .work-stage {
+    flex: 1;
+    position: relative;
+    min-height: 0;
+  }
+
+  /* --- Domain panels (desktop: overlapping, mobile: stacked) --- */
+
+  .work-domain {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+  }
+
+  .domain-title-wrap {
+    flex: 1;
     padding: var(--space-lg);
-    border: 1px dashed var(--color-text-muted);
-    border-radius: var(--radius-sketch);
-    text-align: center;
+  }
+
+  .domain-num {
+    display: block;
+    font-size: var(--font-size-sm);
+    color: var(--color-accent);
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-xs);
+  }
+
+  .domain-heading {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    color: var(--color-text);
+    margin-bottom: var(--space-md);
+  }
+
+  .domain-desc {
+    font-size: var(--font-size-base);
+    color: var(--color-text-muted);
+    max-width: 400px;
+    line-height: 1.55;
+  }
+
+  .domain-scene {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg);
+  }
+
+  .domain-scene :global(svg) {
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+  }
+
+  /* --- Sketch divider below header --- */
+
+  .work-header::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 2px;
+    margin-top: var(--space-md);
+    margin-left: var(--space-lg);
+    background: var(--color-border);
+    opacity: 0.2;
+    border-radius: 1px;
+  }
+
+  /* --- Mobile / reduced-motion fallback --- */
+
+  @media (max-width: 768px) {
+    .work-pinned {
+      height: auto;
+    }
+
+    .work-header {
+      padding-top: var(--space-xl);
+    }
+
+    .work-stage {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+      padding-bottom: var(--space-xl);
+    }
+
+    .work-domain {
+      position: static;
+      flex-direction: column;
+      gap: var(--space-md);
+      align-items: stretch;
+    }
+
+    .domain-title-wrap {
+      padding: var(--space-md) 0 0;
+    }
+
+    .domain-scene {
+      padding: 0;
+    }
+
+    .domain-scene :global(svg) {
+      max-width: 260px;
+    }
+
+    .work-progress {
+      display: none;
+    }
+
+    .work-header::after {
+      margin-left: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) and (min-width: 769px) {
+    .work-pinned {
+      height: auto;
+    }
+
+    .work-stage {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2xl);
+      padding-bottom: var(--space-xl);
+    }
+
+    .work-domain {
+      position: static;
+    }
+
+    .work-progress {
+      display: none;
+    }
   }
 </style>

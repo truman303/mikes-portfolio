@@ -48,16 +48,11 @@ The sketch theme benefits from a textured background rather than flat colors.
 
 ---
 
-### 4. Brand Logos (Stage 6)
+### 4. Brand Logos (Stage 6) ✓
 
 Need visual representations for: Itron, Schlumberger, Actaris, Eskom, GEW, Hensoldt, iPay, Ontec, TRG.
 
-**Options**:
-- Source actual SVG logos (licensing permitting) and display them monochromatically
-- Render brand names as styled text in Architects Daughter font inside sketch-style frames (zero licensing issues, fits the theme)
-- Hybrid: actual logos where available, text fallback otherwise
-
-**Decision**: TBD during Stage 6. Text-in-sketch-frames is the safe default.
+**Decision**: Brand names rendered as styled text in Architects Daughter font inside sketch-style card frames. Each card has a hand-drawn wavy SVG accent underline and slight per-card rotation for visual variety. CSS-only infinite marquee (`@keyframes translateX(-50%)` on a duplicated strip) with edge-fade mask, hover-to-pause, `prefers-reduced-motion` wrap fallback, and mobile responsive sizing. Zero licensing issues, fits the sketch theme perfectly.
 
 ---
 

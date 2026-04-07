@@ -1,31 +1,212 @@
 ---
+const brands = [
+  'Itron',
+  'Schlumberger',
+  'Actaris',
+  'Eskom',
+  'GEW',
+  'Hensoldt',
+  'iPay',
+  'Ontec',
+  'TRG',
+];
 ---
 
 <section id="brands" class="section brands-section">
-  <div class="container">
-    <h2 class="section-title">Brands</h2>
-    <p class="section-subtitle">Brands I've had the privilege of working with.</p>
-    <p class="placeholder-note">[ Infinite logo marquee — Stage 6 ]</p>
+  <div class="brands-header">
+    <div class="container">
+      <h2 class="section-title">Brands</h2>
+      <p class="brands-subtitle">Brands I've had the privilege of working with.</p>
+    </div>
+  </div>
+
+  <div class="marquee" aria-label="Brand logos">
+    <div class="marquee-track">
+      {brands.map((brand) => (
+        <div class="brand-card">
+          <span class="brand-name">{brand}</span>
+          <svg class="brand-accent" viewBox="0 0 80 6" aria-hidden="true">
+            <path d="M2 4 Q10 1 20 3.5 Q35 6 50 2.5 Q65 0 78 3.5" />
+          </svg>
+        </div>
+      ))}
+      {brands.map((brand) => (
+        <div class="brand-card" aria-hidden="true">
+          <span class="brand-name">{brand}</span>
+          <svg class="brand-accent" viewBox="0 0 80 6" aria-hidden="true">
+            <path d="M2 4 Q10 1 20 3.5 Q35 6 50 2.5 Q65 0 78 3.5" />
+          </svg>
+        </div>
+      ))}
+    </div>
   </div>
 </section>
 
 <style>
   .brands-section {
     background-color: var(--color-bg-alt);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-xl);
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+    overflow: hidden;
   }
 
-  .section-subtitle {
+  .brands-header {
+    flex-shrink: 0;
+  }
+
+  .brands-subtitle {
     color: var(--color-text-muted);
     font-size: var(--font-size-lg);
-    margin-bottom: var(--space-xl);
+    margin-top: var(--space-xs);
   }
 
-  .placeholder-note {
-    color: var(--color-text-muted);
-    font-size: var(--font-size-sm);
-    padding: var(--space-lg);
-    border: 1px dashed var(--color-text-muted);
+  /* --- Marquee --- */
+
+  .marquee {
+    width: 100%;
+    position: relative;
+    /* Fade edges to reinforce the "infinite" feel */
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: var(--space-lg);
+    width: max-content;
+    animation: marquee 40s linear infinite;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* --- Brand cards --- */
+
+  .brand-card {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg) var(--space-xl);
+    background: var(--color-card-bg);
+    border: var(--border-sketch);
     border-radius: var(--radius-sketch);
-    text-align: center;
+    box-shadow: var(--shadow-sketch);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: default;
+  }
+
+  .brand-card:hover {
+    transform: translateY(-4px) rotate(0deg) !important;
+    box-shadow: 3px 4px 0 var(--color-border);
+  }
+
+  /* Slight rotations for hand-drawn feel */
+  .brand-card:nth-child(9n+1) { transform: rotate(-1.2deg); }
+  .brand-card:nth-child(9n+2) { transform: rotate(0.8deg); }
+  .brand-card:nth-child(9n+3) { transform: rotate(-0.5deg); }
+  .brand-card:nth-child(9n+4) { transform: rotate(1.4deg); }
+  .brand-card:nth-child(9n+5) { transform: rotate(-0.9deg); }
+  .brand-card:nth-child(9n+6) { transform: rotate(0.6deg); }
+  .brand-card:nth-child(9n+7) { transform: rotate(-1.5deg); }
+  .brand-card:nth-child(9n+8) { transform: rotate(1.1deg); }
+  .brand-card:nth-child(9n+9) { transform: rotate(-0.3deg); }
+
+  .brand-name {
+    font-size: var(--font-size-2xl);
+    color: var(--color-text);
+    white-space: nowrap;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  .brand-accent {
+    width: 60px;
+    height: 6px;
+    stroke: var(--color-accent);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    opacity: 0.6;
+  }
+
+  /* --- Reduced motion --- */
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+
+    .marquee {
+      mask-image: none;
+      -webkit-mask-image: none;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .marquee-track {
+      padding: 0 var(--space-lg);
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-lg);
+      width: auto;
+    }
+
+    /* Hide the duplicate strip when not animating */
+    .brand-card:nth-child(n+10) {
+      display: none;
+    }
+  }
+
+  /* --- Mobile --- */
+
+  @media (max-width: 768px) {
+    .brands-section {
+      gap: var(--space-lg);
+      min-height: auto;
+      padding-top: var(--space-xl);
+      padding-bottom: var(--space-xl);
+    }
+
+    .brand-name {
+      font-size: var(--font-size-xl);
+    }
+
+    .brand-card {
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .marquee-track {
+      animation-duration: 30s;
+      gap: var(--space-md);
+    }
   }
 </style>

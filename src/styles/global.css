@@ -1,0 +1,171 @@
+/* ========================================
+   Mike Fellowes Portfolio — Design System
+   ======================================== */
+
+@font-face {
+  font-family: 'Architects Daughter';
+  src: url('/fonts/ArchitectsDaughter-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Reset --- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Architects Daughter', cursive;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  background-image: var(--bg-texture);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-underline-offset: 4px;
+}
+
+/* --- Theme Tokens --- */
+
+:root {
+  /* Light mode — warm paper feel */
+  --color-bg: #faf6f0;
+  --color-bg-alt: #f0ebe3;
+  --color-text: #2c2c2c;
+  --color-text-muted: #6b6560;
+  --color-accent: #d35233;
+  --color-accent-hover: #b8432a;
+  --color-border: #2c2c2c;
+  --color-card-bg: #fffdf9;
+  --color-figure: #2c2c2c;
+
+  --bg-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+
+  --shadow-sketch: 2px 2px 0 var(--color-border);
+  --border-sketch: 2px solid var(--color-border);
+  --radius-sketch: 2px;
+
+  --font-body: 'Architects Daughter', cursive;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 2.75rem;
+  --font-size-hero: clamp(2.5rem, 6vw, 5rem);
+
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  --space-2xl: 8rem;
+
+  --header-height: 72px;
+}
+
+[data-theme='dark'] {
+  --color-bg: #1a1a1e;
+  --color-bg-alt: #242428;
+  --color-text: #e8e4df;
+  --color-text-muted: #9a958f;
+  --color-accent: #e8754a;
+  --color-accent-hover: #f09070;
+  --color-border: #e8e4df;
+  --color-card-bg: #242428;
+  --color-figure: #e8e4df;
+
+  --bg-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+}
+
+/* --- Sketch Utilities --- */
+
+.sketch-border {
+  border: var(--border-sketch);
+  border-radius: var(--radius-sketch);
+  box-shadow: var(--shadow-sketch);
+}
+
+.sketch-card {
+  background: var(--color-card-bg);
+  border: var(--border-sketch);
+  border-radius: var(--radius-sketch);
+  box-shadow: var(--shadow-sketch);
+  padding: var(--space-lg);
+}
+
+/* --- Section Layout --- */
+
+.section {
+  min-height: 100vh;
+  padding: var(--space-xl) var(--space-lg);
+  position: relative;
+}
+
+.section-title {
+  font-size: var(--font-size-3xl);
+  color: var(--color-text);
+  margin-bottom: var(--space-lg);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 var(--space-lg);
+}
+
+/* --- Stick Figure Color --- */
+
+.stick-figure {
+  color: var(--color-figure);
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* --- Scrollbar styling (subtle) --- */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-alt);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-text-muted);
+  border-radius: 4px;
+}

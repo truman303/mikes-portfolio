@@ -1,0 +1,53 @@
+---
+---
+
+<section id="mike" class="section hero-section">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">Hello, I'm <span class="hero-name">Mike Fellowes</span></h1>
+    </div>
+    <div class="hero-carousel" aria-label="Things that describe me">
+      <!-- Stick figure carousel will be populated in Stage 3 -->
+      <p class="placeholder-note">[ Stick figure carousel — Stage 3 ]</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: var(--space-2xl);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-title {
+    font-size: var(--font-size-hero);
+    line-height: 1.15;
+    color: var(--color-text);
+  }
+
+  .hero-name {
+    color: var(--color-accent);
+    display: block;
+  }
+
+  .hero-carousel {
+    margin-top: var(--space-xl);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .placeholder-note {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    padding: var(--space-lg);
+    border: 1px dashed var(--color-text-muted);
+    border-radius: var(--radius-sketch);
+    text-align: center;
+  }
+</style>

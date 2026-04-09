@@ -91,7 +91,7 @@ const figureAnimations: Record<string, AnimationFactory> = {
     return tl;
   },
 
-  runner: (card) => {
+  skater: (card) => {
     const tl = gsap.timeline({ paused: true });
     const lines = card.querySelectorAll('.motion-lines path');
     if (lines.length) {

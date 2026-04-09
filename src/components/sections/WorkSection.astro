@@ -6,36 +6,42 @@ import DefenseScene from '../svg/scenes/DefenseScene.astro';
 import AgentSkillsScene from '../svg/scenes/AgentSkillsScene.astro';
 
 const domains = [
+//   {
+//     id: 'utilities',
+//     num: '01',
+//     title: 'Utilities',
+//     desc: 'Electricity, water & gas metering, system integrations and the infrastructure that connect them all - HSM/STS/NRS/CIM/MDM.',
+//   },
   {
     id: 'utilities',
     num: '01',
     title: 'Utilities',
-    desc: 'Electricity, water & gas metering — prepayment platforms, system integrations, and the infrastructure that connects them all.',
+    desc: 'Electricity, water & gas metering systems and the integrations that connect them all - STS/NRS/CIM/MDM/ERP/CRM.',
   },
   {
     id: 'payments',
     num: '02',
     title: 'Payments',
-    desc: 'Point-of-sale terminals, NFC contactless, prepayment & smart card systems — making every transaction seamless.',
+    desc: 'Point-of-sale, smart cards, NFC and prepayment systems — making every transaction seamless.',
   },
   {
     id: 'it-management',
     num: '03',
-    title: 'IT Management',
-    desc: 'Enterprise platforms, customer portals, agent harnesses & the tools that keep distributed teams productive.',
+    title: 'IT Service Management',
+    desc: 'Building enterprise platforms, portals & the tools that keep systems secure and teams productive - CI/CD, telemetry, monitoring, ticketing...',
   },
   {
     id: 'defense',
     num: '04',
     title: 'Defense & Radio',
     desc: 'Radio spectrum management, electronic warfare systems & licensing infrastructure — securing the airwaves.',
-  },
-  {
-    id: 'agent-skills',
-    num: '05',
-    title: 'Agent Skills',
-    desc: 'Open-source AI agent skills — hand-crafted tools built to help developers and teams work smarter.',
-  },
+  }
+//   {
+//     id: 'agent-skills',
+//     num: '05',
+//     title: 'Agent Skills',
+//     desc: 'Open-source AI agent skills — hand-crafted tools built to help developers and teams work smarter.',
+//   },
 ];
 ---
 
@@ -49,6 +55,9 @@ const domains = [
             <span class="work-progress-dot" data-index={i} />
           ))}
         </div>
+      </div>
+      <div class="container">
+        <p class="work-tagline">In my 20+ years developing software, I've worked in exciting domains that have a global impact.</p>
       </div>
     </div>
 
@@ -97,7 +106,7 @@ const domains = [
         </div>
       </div>
 
-      <div class="work-domain" data-domain="agent-skills">
+      <!-- <div class="work-domain" data-domain="agent-skills">
         <div class="domain-title-wrap">
           <span class="domain-num">{domains[4].num}</span>
           <h3 class="domain-heading">{domains[4].title}</h3>
@@ -106,7 +115,8 @@ const domains = [
         <div class="domain-scene">
           <AgentSkillsScene />
         </div>
-      </div>
+      </div> -->
+
     </div>
   </div>
 </section>
@@ -146,6 +156,12 @@ const domains = [
 
   .work-title {
     margin-bottom: 0;
+  }
+
+  .work-tagline {
+    font-size: var(--font-size-base);
+    color: var(--color-text-muted);
+    margin-top: var(--space-xs);
   }
 
   /* --- Progress dots --- */

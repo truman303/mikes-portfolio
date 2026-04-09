@@ -4,5 +4,5 @@ import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
   site: 'https://mikefellowes.dev',
-//   adapter: cloudflare()
+  adapter: cloudflare()
 });

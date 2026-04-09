@@ -14,7 +14,11 @@ const navItems = [
   <div class="header-inner">
     <div class="header-left">
       <div class="profile-badge">
-        <div class="profile-image" aria-hidden="true">
+        <button
+          class="profile-image profile-trigger"
+          type="button"
+          aria-label="View full profile picture"
+        >
           <img
             src="/profile-small.png"
             alt="Profile picture of Mike Fellowes"
@@ -24,7 +28,7 @@ const navItems = [
             loading="lazy"
             decoding="async"
           />
-        </div>
+        </button>
         <p class="profile-subcopy">
             Track record of delivering mission critical systems that stand the test of time.
         </p>
@@ -69,7 +73,28 @@ const navItems = [
   </nav>
 </header>
 
+<div class="profile-lightbox" id="profile-lightbox" role="dialog" aria-modal="true" aria-label="Profile picture">
+  <div class="lightbox-backdrop"></div>
+  <div class="lightbox-frame">
+    <img
+      src="/profile-large.png"
+      alt="Mike Fellowes"
+      class="lightbox-photo"
+      width="400"
+      height="400"
+    />
+    <button class="lightbox-close" type="button" aria-label="Close">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="6" y1="6" x2="18" y2="18" />
+        <line x1="18" y1="6" x2="6" y2="18" />
+      </svg>
+    </button>
+  </div>
+</div>
+
 <script>
+  import gsap from 'gsap';
+
   function initMobileMenu() {
     const hamburger = document.querySelector('.hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -91,8 +116,66 @@ const navItems = [
     });
   }
 
+  function initProfileLightbox() {
+    const trigger = document.querySelector('.profile-trigger') as HTMLElement | null;
+    const lightbox = document.getElementById('profile-lightbox');
+    const backdrop = lightbox?.querySelector('.lightbox-backdrop') as HTMLElement | null;
+    const frame = lightbox?.querySelector('.lightbox-frame') as HTMLElement | null;
+    const closeBtn = lightbox?.querySelector('.lightbox-close') as HTMLElement | null;
+    if (!trigger || !lightbox || !backdrop || !frame || !closeBtn) return;
+
+    let isOpen = false;
+
+    function open() {
+      if (isOpen) return;
+      isOpen = true;
+      lightbox!.classList.add('is-visible');
+      document.body.style.overflow = 'hidden';
+
+      const tl = gsap.timeline();
+      tl.fromTo(backdrop!, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3, ease: 'power2.out' })
+        .fromTo(
+          frame!,
+          { autoAlpha: 0, scale: 0.6, rotation: -3 },
+          { autoAlpha: 1, scale: 1, rotation: 0, duration: 0.45, ease: 'back.out(1.4)' },
+          '-=0.15'
+        )
+        .fromTo(
+          closeBtn!,
+          { autoAlpha: 0, y: -10 },
+          { autoAlpha: 1, y: 0, duration: 0.25, ease: 'power2.out' },
+          '-=0.15'
+        );
+    }
+
+    function close() {
+      if (!isOpen) return;
+      isOpen = false;
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          lightbox!.classList.remove('is-visible');
+          document.body.style.overflow = '';
+        },
+      });
+      tl.to(frame!, { autoAlpha: 0, scale: 0.85, rotation: 2, duration: 0.25, ease: 'power2.in' })
+        .to(backdrop!, { autoAlpha: 0, duration: 0.2, ease: 'power2.in' }, '-=0.1');
+    }
+
+    trigger.addEventListener('click', open);
+    backdrop.addEventListener('click', close);
+    closeBtn.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) close();
+    });
+  }
+
   initMobileMenu();
-  document.addEventListener('astro:after-swap', initMobileMenu);
+  initProfileLightbox();
+  document.addEventListener('astro:after-swap', () => {
+    initMobileMenu();
+    initProfileLightbox();
+  });
 </script>
 
 <style>
@@ -140,6 +223,22 @@ const navItems = [
     justify-content: center;
     flex-shrink: 0;
     overflow: hidden;
+  }
+
+  .profile-trigger {
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .profile-trigger:hover {
+    transform: scale(1.08);
+    box-shadow: 3px 3px 0 var(--color-border);
+  }
+
+  .profile-trigger:active {
+    transform: scale(0.96);
   }
 
   .profile-image svg {
@@ -301,5 +400,73 @@ const navItems = [
   /* Prevent body scroll when menu is open */
   :global(body.menu-open) {
     overflow: hidden;
+  }
+
+  /* --- Profile Lightbox --- */
+
+  :global(.profile-lightbox) {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    place-items: center;
+  }
+
+  :global(.profile-lightbox.is-visible) {
+    display: grid;
+  }
+
+  :global(.lightbox-backdrop) {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    visibility: hidden;
+    cursor: pointer;
+  }
+
+  :global(.lightbox-frame) {
+    position: relative;
+    border: 3px solid var(--color-border);
+    border-radius: var(--radius-sketch);
+    box-shadow: 4px 4px 0 var(--color-border);
+    background: var(--color-card-bg);
+    padding: 6px;
+    max-width: min(400px, 85vw);
+    max-height: 85vh;
+    visibility: hidden;
+  }
+
+  :global(.lightbox-photo) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-sketch);
+  }
+
+  :global(.lightbox-close) {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: 2px 2px 0 var(--color-border);
+    transition: transform 0.15s ease, background-color 0.15s ease;
+    visibility: hidden;
+    padding: 0;
+  }
+
+  :global(.lightbox-close:hover) {
+    transform: scale(1.12) rotate(90deg);
+    background: var(--color-accent);
+    color: #fff;
   }
 </style>

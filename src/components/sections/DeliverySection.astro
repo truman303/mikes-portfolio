@@ -154,36 +154,67 @@ import DeliveryCard from '../DeliveryCard.astro';
         </svg>
       </DeliveryCard> -->
 
-      <!-- 05 — Leadership -->
+      <!-- 05 — Human Skills -->
       <DeliveryCard num="05" title="Human Skills" desc="Scoping projects, writing proposals, managing expectations & costs - turning ideas into reality.">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 100" class="stick-figure" aria-hidden="true">
-          Server stack
-          <rect x="6" y="10" width="40" height="14" rx="2" />
-          <circle cx="38" cy="17" r="2" fill="currentColor" stroke="none" />
-          <line x1="12" y1="17" x2="28" y2="17" />
-          <rect x="6" y="26" width="40" height="14" rx="2" />
-          <circle cx="38" cy="33" r="2" fill="currentColor" stroke="none" />
-          <line x1="12" y1="33" x2="24" y2="33" />
-          <rect x="6" y="42" width="40" height="14" rx="2" />
-          <circle cx="38" cy="49" r="2" fill="currentColor" stroke="none" />
-          <line x1="12" y1="49" x2="30" y2="49" />
-          CI/CD circular arrows
-          <path d="M76 18 Q92 6 104 18" />
-          <path d="M102 14 L104 18 L100 20" />
-          <path d="M104 34 Q88 46 76 34" />
-          <path d="M78 38 L76 34 L80 32" />
-          <text x="90" y="30" text-anchor="middle" fill="currentColor" stroke="none" font-size="7" font-family="inherit">CI</text>
-          Telemetry graph
-          <rect x="66" y="56" width="68" height="36" rx="2" />
-          <path d="M74 84 L82 76 L92 80 L100 66 L110 70 L120 62 L126 64" />
-          Graph dots
-          <circle cx="82" cy="76" r="2" fill="currentColor" stroke="none" />
-          <circle cx="100" cy="66" r="2" fill="currentColor" stroke="none" />
-          <circle cx="120" cy="62" r="2" fill="currentColor" stroke="none" />
-          Connection from server to CI/CD
-          <path d="M46 26 L72 22" stroke-dasharray="3 2" opacity="0.4" />
-          Connection from CI/CD to telemetry
-          <path d="M90 46 L90 56" stroke-dasharray="3 2" opacity="0.4" />
+          <!-- Whiteboard -->
+          <rect x="8" y="2" width="124" height="58" rx="2" />
+
+          <!-- Read models — lime green -->
+          <rect x="38" y="6" width="13" height="10" rx="1" fill="#9DC76A" stroke="#88ad59" stroke-width="0.5" />
+          <rect x="88" y="6" width="13" height="10" rx="1" fill="#9DC76A" stroke="#88ad59" stroke-width="0.5" />
+
+          <!-- Main timeline: events, policies, commands, external -->
+          <rect x="14" y="22" width="13" height="10" rx="1" fill="#F0943A" stroke="#d07e2e" stroke-width="0.5" />
+          <rect x="30" y="22" width="13" height="10" rx="1" fill="#B896CF" stroke="#9d7cb5" stroke-width="0.5" />
+          <rect x="46" y="22" width="13" height="10" rx="1" fill="#7B9FD4" stroke="#6688ba" stroke-width="0.5" />
+          <rect x="62" y="22" width="13" height="10" rx="1" fill="#F0943A" stroke="#d07e2e" stroke-width="0.5" />
+          <rect x="78" y="22" width="13" height="10" rx="1" fill="#B896CF" stroke="#9d7cb5" stroke-width="0.5" />
+          <rect x="94" y="22" width="13" height="10" rx="1" fill="#7B9FD4" stroke="#6688ba" stroke-width="0.5" />
+          <rect x="110" y="22" width="13" height="10" rx="1" fill="#E8919F" stroke="#cc7a87" stroke-width="0.5" />
+
+          <!-- Bottom row events — orange -->
+          <rect x="46" y="40" width="13" height="10" rx="1" fill="#F0943A" stroke="#d07e2e" stroke-width="0.5" />
+          <rect x="94" y="40" width="13" height="10" rx="1" fill="#F0943A" stroke="#d07e2e" stroke-width="0.5" />
+
+          <!-- Flow arrows -->
+          <path d="M27 27 L30 27" opacity="0.35" />
+          <path d="M43 27 L46 27" opacity="0.35" />
+          <path d="M59 27 L62 27" opacity="0.35" />
+          <path d="M75 27 L78 27" opacity="0.35" />
+          <path d="M91 27 L94 27" opacity="0.35" />
+          <path d="M107 27 L110 27" opacity="0.35" />
+          <!-- Read model connections -->
+          <path d="M44 16 L44 22" stroke-dasharray="2 1" opacity="0.3" />
+          <path d="M94 16 L94 22" stroke-dasharray="2 1" opacity="0.3" />
+          <!-- Down to bottom events -->
+          <path d="M52 32 L52 40" stroke-dasharray="2 1" opacity="0.3" />
+          <path d="M100 32 L100 40" stroke-dasharray="2 1" opacity="0.3" />
+
+          <!-- Figure 1 — pointing up at board -->
+          <circle cx="28" cy="70" r="5" />
+          <line x1="28" y1="75" x2="28" y2="86" />
+          <path d="M28 79 L20 76" />
+          <path d="M28 79 Q34 74 38 66" />
+          <path d="M28 86 L24 96" />
+          <path d="M28 86 L32 96" />
+
+          <!-- Figure 2 — discussing, arms open -->
+          <circle cx="70" cy="70" r="5" />
+          <line x1="70" y1="75" x2="70" y2="86" />
+          <path d="M70 79 L62 74" />
+          <path d="M70 79 L78 74" />
+          <path d="M70 86 L66 96" />
+          <path d="M70 86 L74 96" />
+
+          <!-- Figure 3 — reaching up to place a sticky -->
+          <circle cx="112" cy="70" r="5" />
+          <line x1="112" y1="75" x2="112" y2="86" />
+          <path d="M112 79 L104 76" />
+          <path d="M112 79 Q118 72 122 64" />
+          <rect x="120" y="58" width="8" height="6" rx="0.5" fill="#F0943A" stroke="#d07e2e" stroke-width="0.5" />
+          <path d="M112 86 L108 96" />
+          <path d="M112 86 L116 96" />
         </svg>
       </DeliveryCard>
 

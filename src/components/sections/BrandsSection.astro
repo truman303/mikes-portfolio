@@ -1,14 +1,18 @@
 ---
 const brands = [
-  'Itron',
-  'Schlumberger',
-  'Actaris',
-  'Eskom',
-  'GEW',
-  'Hensoldt',
-  'iPay',
-  'Ontec',
-  'TRG',
+  { name: 'Itron',        logo: '/brands/itron-logo-dist.svg' },
+  { name: 'Schlumberger', logo: '/brands/slb-logo-dist.png' },
+  { name: 'Actaris',      logo: '/brands/actaris-logo-dist.png' },
+  { name: 'Eskom',        logo: '/brands/eskom-logo-dist.png' },
+//   { name: 'GEW',          logo: '/brands/gew.png' },
+  {
+    name: 'Hensoldt',
+    logo: '/brands/hensoldt-logo-dist.png',
+    cardClass: 'brand-card--hensoldt',
+  },
+  { name: 'iPay',         logo: '/brands/ipay-logo-dist.png' },
+  { name: 'Ontec',        logo: '/brands/ontec-logo-dist.jpg' },
+  { name: 'TRG',          logo: '/brands/trg-logo-dist.png' },
 ];
 ---
 
@@ -20,7 +24,7 @@ const brands = [
     </div>
   </div>
 
-  <div class="marquee" aria-label="Brand logos">
+  <!-- <div class="marquee" aria-label="Brand logos">
     <div class="marquee-track">
       {brands.map((brand) => (
         <div class="brand-card">
@@ -39,7 +43,51 @@ const brands = [
         </div>
       ))}
     </div>
+  </div> -->
+
+  <div class="marquee" aria-label="Brand logos">
+    <div class="marquee-track">
+      {brands.map((brand) => (
+        // <div class="brand-card">
+        //   <span class="brand-name">{brand}</span>
+        //   <svg class="brand-accent" viewBox="0 0 80 6" aria-hidden="true">
+        //     <path d="M2 4 Q10 1 20 3.5 Q35 6 50 2.5 Q65 0 78 3.5" />
+        //   </svg>
+        // </div>
+        <div class:list={['brand-card', brand.cardClass]}>
+            <img
+            src={brand.logo}
+            alt={brand.name}
+            class="brand-logo"
+            width="300"
+            height="120"
+            loading="lazy"
+            decoding="async"
+            />
+        </div>
+        ))}
+      {brands.map((brand) => (
+        <div class:list={['brand-card', brand.cardClass]}>
+            <img
+                src={brand.logo}
+                alt={brand.name}
+                class="brand-logo"
+                width="300"
+                height="120"
+                loading="lazy"
+                decoding="async"
+                />
+            </div>
+        // <div class="brand-card" aria-hidden="true">
+        //   <span class="brand-name">{brand}</span>
+        //   <svg class="brand-accent" viewBox="0 0 80 6" aria-hidden="true">
+        //     <path d="M2 4 Q10 1 20 3.5 Q35 6 50 2.5 Q65 0 78 3.5" />
+        //   </svg>
+        // </div>
+      ))}
+    </div>
   </div>
+
 </section>
 
 <style>
@@ -128,6 +176,25 @@ const brands = [
     transform: translateY(-4px) rotate(0deg) !important;
     box-shadow: 3px 4px 0 var(--color-border);
   }
+
+  /* Hensoldt mark uses knockout / transparent letterforms — needs a dark surface */
+  .brand-card--hensoldt {
+    background: #58595c;
+    /* border-color: #001a3a; */
+  }
+
+  /* .brand-card--hensoldt:hover {
+    box-shadow: 3px 4px 0 #001a3a;
+  } */
+
+  /* :global([data-theme='dark']) .brand-card--hensoldt {
+    background: #58595c;
+    border-color: #4a7eae;
+  } */
+
+  /* :global([data-theme='dark']) .brand-card--hensoldt:hover {
+    box-shadow: 3px 4px 0 #4a7eae;
+  } */
 
   /* Slight rotations for hand-drawn feel */
   .brand-card:nth-child(9n+1) { transform: rotate(-1.2deg); }

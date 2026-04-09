@@ -74,3 +74,14 @@ The fixed header with 5 nav items plus a dark mode toggle needs to work on small
 Links to LinkedIn, GitHub, and Application Frameworks with a waving goodbye stick figure and site footer.
 
 **Decision**: Three sketch-style contact cards in a flex row, each featuring a hand-drawn SVG icon (two stick-figure people for LinkedIn, code brackets for GitHub, browser/dashboard for App Frameworks), the platform name in Architects Daughter, a short description, and a subtle arrow indicator. Cards use the established design system tokens (`--border-sketch`, `--shadow-sketch`, `--color-card-bg`) with slight per-card rotations (matching the Brands section aesthetic). Hover lifts the card, snaps rotation to 0deg, and shifts the box-shadow/border to accent color. Reuses the existing `WavingFigure.astro` component as a goodbye illustration below the cards. Minimal footer with a wavy SVG divider line and copyright. CSS-only — no GSAP needed. Responsive: cards stack vertically on mobile with rotations removed. `prefers-reduced-motion`: transitions disabled. All external links open in new tabs with `rel="noopener noreferrer"` and descriptive `aria-label` attributes.
+
+## Black and White Sketch Prompt
+
+This prompt was used to generate the black and white sketch of the profile picture.
+
+```cmd
+Convert this photo into a black and white artistic sketch. Combine clean, minimalist vector line
+art for the main outlines with fine, textured charcoal shading for the facial features and hair. The
+style should belhigh-contrast, hand-drawn, and purely monochrome on a plain white
+background, maintaining the exact likeness of the subject.
+```

@@ -7,14 +7,14 @@ import DeliveryCard from '../DeliveryCard.astro';
     <div class="delivery-header">
       <div class="container">
         <h2 class="section-title delivery-title">Delivery</h2>
-        <p class="delivery-tagline">What I've shipped across industries.</p>
+        <p class="delivery-tagline">What I've shipped, and where I shine.</p>
       </div>
     </div>
 
     <div class="delivery-track">
 
       <!-- 01 — Web, Mobile & Offline -->
-      <DeliveryCard num="01" title="Web, Mobile & Offline" desc="Responsive web apps, native mobile, and offline-first solutions that work everywhere — connected or not.">
+      <DeliveryCard num="01" title="Web, Mobile & Offline" desc="Responsive web apps, mobile apps, and offline-first solutions that work everywhere — connected or not.">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 100" class="stick-figure" aria-hidden="true">
           <!-- Laptop -->
           <rect x="6" y="30" width="46" height="30" rx="2" />
@@ -38,8 +38,8 @@ import DeliveryCard from '../DeliveryCard.astro';
         </svg>
       </DeliveryCard>
 
-      <!-- 02 — APIs & Portals -->
-      <DeliveryCard num="02" title="APIs & Portals" desc="Field tools, customer portals, and agent harnesses — the frontline of enterprise delivery.">
+      <!-- 02 — APIs & Databases -->
+      <DeliveryCard num="02" title="APIs & Databases" desc="Reliable, scalable APIs and databases — the frontline of enterprise delivery in the age of agentic AI.">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 100" class="stick-figure" aria-hidden="true">
           <!-- API curly braces -->
           <path d="M14 18 Q8 18 8 28 Q8 38 2 44 Q8 50 8 60 Q8 70 14 70" />
@@ -70,7 +70,7 @@ import DeliveryCard from '../DeliveryCard.astro';
       </DeliveryCard>
 
       <!-- 03 — System Integrations -->
-      <DeliveryCard num="03" title="System Integrations" desc="Connecting billing, ERP, CRM, SAP & telemetry into cohesive, reliable workflows.">
+      <DeliveryCard num="03" title="System Integrations" desc="Connecting OLTP, Billing, ERP, CRM & telemetry into cohesive, observable workflows.">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 100" class="stick-figure" aria-hidden="true">
           <!-- Central hub -->
           <circle cx="70" cy="46" r="12" />
@@ -84,9 +84,9 @@ import DeliveryCard from '../DeliveryCard.astro';
           <!-- CRM box (bottom-left) -->
           <rect x="4" y="70" width="34" height="20" rx="2" />
           <text x="21" y="84" text-anchor="middle" fill="currentColor" stroke="none" font-size="9" font-family="inherit">CRM</text>
-          <!-- SAP box (bottom-right) -->
+          <!-- OLTP box (bottom-right) -->
           <rect x="102" y="70" width="34" height="20" rx="2" />
-          <text x="119" y="84" text-anchor="middle" fill="currentColor" stroke="none" font-size="9" font-family="inherit">SAP</text>
+          <text x="119" y="84" text-anchor="middle" fill="currentColor" stroke="none" font-size="9" font-family="inherit">OLTP</text>
           <!-- Connection lines to hub -->
           <line x1="38" y1="22" x2="60" y2="38" stroke-dasharray="4 2" />
           <line x1="102" y1="22" x2="80" y2="38" stroke-dasharray="4 2" />
@@ -128,29 +128,62 @@ import DeliveryCard from '../DeliveryCard.astro';
         </svg>
       </DeliveryCard>
 
-      <!-- 05 — Utilities Infrastructure -->
+      <!-- 05 — Utilities Infrastructure
       <DeliveryCard num="05" title="Utilities" desc="Electricity, water & gas — prepayment, metering, HSM, MDM, and STS platforms.">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 100" class="stick-figure" aria-hidden="true">
-          <!-- Lightning bolt -->
+          Lightning bolt
           <path d="M22 6 L14 38 L22 38 L12 62 L34 28 L24 28 Z" />
-          <!-- Water drop -->
+          Water drop
           <path d="M66 14 Q66 6 72 16 Q78 26 72 36 Q66 44 66 36 Q60 26 66 14 Z" />
           <path d="M58 44 Q68 48 78 44" opacity="0.4" />
-          <!-- Gas flame -->
+          Gas flame
           <path d="M118 36 Q114 20 118 8 Q122 20 128 14 Q124 28 118 36 Z" />
           <line x1="110" y1="38" x2="126" y2="38" />
-          <!-- Meter/gauge -->
+          Meter/gauge
           <rect x="44" y="62" width="52" height="28" rx="3" />
           <path d="M70 90 L70 82 L62 72" />
           <path d="M52 76 Q70 66 88 76" fill="none" />
           <circle cx="58" cy="68" r="1.5" fill="currentColor" stroke="none" />
           <circle cx="70" cy="66" r="1.5" fill="currentColor" stroke="none" />
           <circle cx="82" cy="68" r="1.5" fill="currentColor" stroke="none" />
-          <!-- Pipe connecting bottom -->
+          Pipe connecting bottom
           <line x1="4" y1="76" x2="44" y2="76" />
           <line x1="96" y1="76" x2="136" y2="76" />
           <circle cx="4" cy="76" r="3" />
           <circle cx="136" cy="76" r="3" />
+        </svg>
+      </DeliveryCard> -->
+
+      <!-- 05 — Leadership -->
+      <DeliveryCard num="05" title="Human Skills" desc="Scoping projects, writing proposals, managing expectations & costs - turning ideas into reality.">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 100" class="stick-figure" aria-hidden="true">
+          Server stack
+          <rect x="6" y="10" width="40" height="14" rx="2" />
+          <circle cx="38" cy="17" r="2" fill="currentColor" stroke="none" />
+          <line x1="12" y1="17" x2="28" y2="17" />
+          <rect x="6" y="26" width="40" height="14" rx="2" />
+          <circle cx="38" cy="33" r="2" fill="currentColor" stroke="none" />
+          <line x1="12" y1="33" x2="24" y2="33" />
+          <rect x="6" y="42" width="40" height="14" rx="2" />
+          <circle cx="38" cy="49" r="2" fill="currentColor" stroke="none" />
+          <line x1="12" y1="49" x2="30" y2="49" />
+          CI/CD circular arrows
+          <path d="M76 18 Q92 6 104 18" />
+          <path d="M102 14 L104 18 L100 20" />
+          <path d="M104 34 Q88 46 76 34" />
+          <path d="M78 38 L76 34 L80 32" />
+          <text x="90" y="30" text-anchor="middle" fill="currentColor" stroke="none" font-size="7" font-family="inherit">CI</text>
+          Telemetry graph
+          <rect x="66" y="56" width="68" height="36" rx="2" />
+          <path d="M74 84 L82 76 L92 80 L100 66 L110 70 L120 62 L126 64" />
+          Graph dots
+          <circle cx="82" cy="76" r="2" fill="currentColor" stroke="none" />
+          <circle cx="100" cy="66" r="2" fill="currentColor" stroke="none" />
+          <circle cx="120" cy="62" r="2" fill="currentColor" stroke="none" />
+          Connection from server to CI/CD
+          <path d="M46 26 L72 22" stroke-dasharray="3 2" opacity="0.4" />
+          Connection from CI/CD to telemetry
+          <path d="M90 46 L90 56" stroke-dasharray="3 2" opacity="0.4" />
         </svg>
       </DeliveryCard>
 
@@ -189,16 +222,16 @@ import DeliveryCard from '../DeliveryCard.astro';
       </DeliveryCard>
 
       <!-- 07 — Point of Sale -->
-      <DeliveryCard num="07" title="Point of Sale" desc="Terminals, receipt printers, and payment flows — from tap to transaction complete.">
+      <!-- <DeliveryCard num="07" title="Point of Sale" desc="Terminals, receipt printers, and payment flows — from tap to transaction complete.">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 100" class="stick-figure" aria-hidden="true">
-          <!-- POS terminal body -->
+          POS terminal body
           <rect x="8" y="14" width="52" height="68" rx="3" />
-          <!-- Screen -->
+          Screen
           <rect x="14" y="20" width="40" height="22" rx="2" />
           <line x1="20" y1="28" x2="38" y2="28" />
           <line x1="20" y1="34" x2="44" y2="34" />
           <text x="34" y="28" text-anchor="middle" fill="currentColor" stroke="none" font-size="7" font-family="inherit">$</text>
-          <!-- Keypad dots -->
+          Keypad dots
           <circle cx="22" cy="52" r="2.5" />
           <circle cx="34" cy="52" r="2.5" />
           <circle cx="46" cy="52" r="2.5" />
@@ -208,26 +241,26 @@ import DeliveryCard from '../DeliveryCard.astro';
           <circle cx="22" cy="72" r="2.5" />
           <circle cx="34" cy="72" r="2.5" />
           <circle cx="46" cy="72" r="2.5" />
-          <!-- Receipt curling out top -->
+          Receipt curling out top
           <rect x="18" y="2" width="28" height="14" rx="1" />
           <line x1="24" y1="6" x2="38" y2="6" />
           <line x1="24" y1="10" x2="34" y2="10" />
           <path d="M46 9 Q50 8 48 2" />
-          <!-- Contactless card tap (right side) -->
+          Contactless card tap (right side)
           <rect x="82" y="38" width="40" height="26" rx="3" />
           <rect x="88" y="44" width="10" height="8" rx="1" />
-          <!-- NFC arcs from card -->
+          NFC arcs from card
           <path d="M78 42 Q72 52 78 62" />
           <path d="M72 38 Q64 52 72 66" />
-          <!-- Tap arrow -->
+          Tap arrow
           <path d="M82 52 L62 52" stroke-dasharray="3 2" opacity="0.4" />
         </svg>
-      </DeliveryCard>
+      </DeliveryCard> -->
 
       <!-- 08 — Enterprise-Ready -->
-      <DeliveryCard num="08" title="Enterprise-Ready" desc="APIs, telemetry dashboards, and CI/CD pipelines — built for scale and reliability.">
+      <!-- <DeliveryCard num="08" title="Enterprise-Ready" desc="APIs, telemetry dashboards, and CI/CD pipelines — built for scale and reliability.">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 100" class="stick-figure" aria-hidden="true">
-          <!-- Server stack -->
+          Server stack
           <rect x="6" y="10" width="40" height="14" rx="2" />
           <circle cx="38" cy="17" r="2" fill="currentColor" stroke="none" />
           <line x1="12" y1="17" x2="28" y2="17" />
@@ -237,25 +270,27 @@ import DeliveryCard from '../DeliveryCard.astro';
           <rect x="6" y="42" width="40" height="14" rx="2" />
           <circle cx="38" cy="49" r="2" fill="currentColor" stroke="none" />
           <line x1="12" y1="49" x2="30" y2="49" />
-          <!-- CI/CD circular arrows -->
+          CI/CD circular arrows
           <path d="M76 18 Q92 6 104 18" />
           <path d="M102 14 L104 18 L100 20" />
           <path d="M104 34 Q88 46 76 34" />
           <path d="M78 38 L76 34 L80 32" />
           <text x="90" y="30" text-anchor="middle" fill="currentColor" stroke="none" font-size="7" font-family="inherit">CI</text>
-          <!-- Telemetry graph -->
+          Telemetry graph
           <rect x="66" y="56" width="68" height="36" rx="2" />
           <path d="M74 84 L82 76 L92 80 L100 66 L110 70 L120 62 L126 64" />
-          <!-- Graph dots -->
+          Graph dots
           <circle cx="82" cy="76" r="2" fill="currentColor" stroke="none" />
           <circle cx="100" cy="66" r="2" fill="currentColor" stroke="none" />
           <circle cx="120" cy="62" r="2" fill="currentColor" stroke="none" />
-          <!-- Connection from server to CI/CD -->
+          Connection from server to CI/CD
           <path d="M46 26 L72 22" stroke-dasharray="3 2" opacity="0.4" />
-          <!-- Connection from CI/CD to telemetry -->
+          Connection from CI/CD to telemetry
           <path d="M90 46 L90 56" stroke-dasharray="3 2" opacity="0.4" />
         </svg>
-      </DeliveryCard>
+      </DeliveryCard> -->
+
+
 
     </div>
   </div>

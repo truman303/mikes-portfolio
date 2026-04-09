@@ -4,18 +4,18 @@ import WavingFigure from '../svg/figures/WavingFigure.astro';
 const links = [
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/mikefellowes/',
+    href: 'https://www.linkedin.com/in/mike-fellowes-00054360',
     desc: 'Connect with me',
   },
   {
     label: 'GitHub',
-    href: 'https://github.com/mikefellows',
+    href: 'https://github.com/truman303',
     desc: 'Browse my code',
   },
   {
-    label: 'App Frameworks',
-    href: 'https://applicationframeworks.com',
-    desc: 'My consultancy',
+    label: 'Application Frameworks',
+    href: 'https://appframeworks.com',
+    desc: 'Need a whole team? Let\'s talk.',
   },
 ];
 
@@ -46,48 +46,51 @@ const currentYear = new Date().getFullYear();
         >
           <div class="card-icon" aria-hidden="true">
             {label === 'LinkedIn' && (
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="stick-figure">
-                <circle cx="22" cy="14" r="8" />
-                <circle cx="22" cy="14" r="3" fill="currentColor" stroke="none" />
-                <line x1="22" y1="22" x2="22" y2="44" />
-                <path d="M22 30 Q22 28 30 28 Q38 28 38 36 L38 44" />
-                <circle cx="44" cy="14" r="8" />
-                <circle cx="44" cy="14" r="3" fill="currentColor" stroke="none" />
-                <line x1="44" y1="22" x2="44" y2="44" />
-                <path d="M44 30 Q44 28 52 28 Q58 28 58 36 L58 44" />
-                <path d="M28 52 Q38 48 48 52" stroke-dasharray="3 2" opacity="0.5" />
-              </svg>
+                <img
+                    src="/logos/linkedin-logo-dist.png"
+                    alt="LinkedIn"
+                    class="brand-logo"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                    decoding="async"
+                    />
             )}
             {label === 'GitHub' && (
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="stick-figure">
-                <path d="M14 22 L6 34 L14 46" />
-                <path d="M50 22 L58 34 L50 46" />
-                <line x1="28" y1="20" x2="36" y2="48" />
-                <path d="M22 54 Q32 50 42 54 Q52 58 56 52" stroke-dasharray="3 2" />
-                <circle cx="18" cy="8" r="4" />
-                <line x1="18" y1="12" x2="18" y2="16" />
-                <path d="M18 14 Q24 14 28 20" stroke-dasharray="2 2" opacity="0.4" />
-                <circle cx="46" cy="8" r="4" />
-                <line x1="46" y1="12" x2="46" y2="16" />
-                <path d="M46 14 Q40 14 36 20" stroke-dasharray="2 2" opacity="0.4" />
-              </svg>
+                <span class="logo-swap logo-swap--github" aria-hidden="true">
+                  <img
+                    src="/logos/github-logo-dist-black.png"
+                    alt=""
+                    class="brand-logo github-logo--light"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <img
+                    src="/logos/github-logo-dist.png"
+                    alt=""
+                    class="brand-logo github-logo--dark"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </span>
             )}
-            {label === 'App Frameworks' && (
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="stick-figure">
-                <rect x="12" y="8" width="40" height="32" rx="3" />
-                <line x1="12" y1="18" x2="52" y2="18" />
-                <circle cx="18" cy="13" r="2" fill="currentColor" stroke="none" />
-                <circle cx="24" cy="13" r="2" fill="currentColor" stroke="none" />
-                <circle cx="30" cy="13" r="2" fill="currentColor" stroke="none" />
-                <rect x="18" y="23" width="12" height="12" rx="1" />
-                <rect x="34" y="23" width="12" height="6" rx="1" />
-                <rect x="34" y="32" width="12" height="3" rx="1" />
-                <path d="M8 40 L56 40 L52 46 L12 46 Z" />
-                <path d="M22 52 Q32 56 42 52" opacity="0.4" />
-              </svg>
+            {label === 'Application Frameworks' && (
+                <img
+                        src="/logos/afw-logo-dist.png"
+                        alt="Application Frameworks"
+                        class="brand-logo"
+                        width="64"
+                        height="64"
+                        loading="lazy"
+                        decoding="async"
+                        />
             )}
           </div>
-          <span class="card-label">{label}</span>
+          {/* <span class="card-label">{label}</span> */}
           <span class="card-desc">{desc}</span>
           <svg class="card-arrow" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M5 12 L18 12" />
@@ -220,6 +223,34 @@ const currentYear = new Date().getFullYear();
     margin-bottom: var(--space-xs);
   }
 
+  /* GitHub: black mark on light cards, light mark on dark cards */
+  .logo-swap--github {
+    position: relative;
+    width: 64px;
+    height: 64px;
+  }
+
+  .logo-swap--github img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Default matches :root (light); toggle script sets data-theme on <html> */
+  .github-logo--dark {
+    display: none;
+  }
+
+  :global([data-theme='dark']) .github-logo--light {
+    display: none;
+  }
+
+  :global([data-theme='dark']) .github-logo--dark {
+    display: block;
+  }
+
   .card-icon :global(svg) {
     width: 100%;
     height: 100%;
@@ -349,6 +380,11 @@ const currentYear = new Date().getFullYear();
     }
 
     .card-icon {
+      width: 52px;
+      height: 52px;
+    }
+
+    .logo-swap--github {
       width: 52px;
       height: 52px;
     }

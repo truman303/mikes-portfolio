@@ -17,7 +17,7 @@ function initWorkScroll() {
   const shutterStrips = gsap.utils.toArray<HTMLElement>('.shutter-strip');
   const hasShutter = shutterImages.length > 0 && shutterStrips.length > 0;
 
-  const DOMAIN_UNITS = [3, 1, 1, 1];
+  const DOMAIN_UNITS = [1, 1, 1, 1];
   const domainStarts: number[] = [];
   const domainEnds: number[] = [];
   let totalUnits = 0;
@@ -66,7 +66,7 @@ function initWorkScroll() {
           gsap.set(img, { autoAlpha: i === 0 ? 1 : 0 });
         });
         shutterStrips.forEach((strip) => {
-          gsap.set(strip, { scaleY: 0 });
+          gsap.set(strip, { scaleX: 0 });
         });
       }
 
@@ -95,32 +95,33 @@ function initWorkScroll() {
         },
       });
 
-      // --- Shutter image transitions at every integer unit boundary ---
+      // --- Shutter image transitions at domain boundaries (left-to-right) ---
       if (hasShutter) {
-        const STRIP_DUR = 0.1;
-        const STAGGER_CFG = { each: 0.008, from: 'edges' as const };
+        const STRIP_DUR = 0.12;
+        const STAGGER_CFG = { each: 0.012, from: 'start' as const };
 
-        for (let t = 1; t < totalUnits; t++) {
-          const fromIdx = t - 1;
-          const toIdx = t;
+        for (let d = 1; d < numDomains; d++) {
+          const boundary = domainEnds[d - 1];
+          const fromIdx = d - 1;
+          const toIdx = d;
           if (toIdx >= shutterImages.length) break;
 
           tl.to(shutterStrips, {
-            scaleY: 1,
+            scaleX: 1,
             duration: STRIP_DUR,
             stagger: STAGGER_CFG,
             ease: 'power3.inOut',
-          }, t - 0.18);
+          }, boundary - 0.2);
 
-          tl.set(shutterImages[fromIdx], { autoAlpha: 0 }, t);
-          tl.set(shutterImages[toIdx], { autoAlpha: 1 }, t);
+          tl.set(shutterImages[fromIdx], { autoAlpha: 0 }, boundary);
+          tl.set(shutterImages[toIdx], { autoAlpha: 1 }, boundary);
 
           tl.to(shutterStrips, {
-            scaleY: 0,
+            scaleX: 0,
             duration: STRIP_DUR,
             stagger: STAGGER_CFG,
             ease: 'power3.inOut',
-          }, t + 0.02);
+          }, boundary + 0.02);
         }
       }
 

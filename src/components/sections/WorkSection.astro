@@ -33,15 +33,10 @@ const domains = [
 ];
 
 const shutterImages: (string | null)[] = [
-  '/images/gas.jpg',
-  '/images/water.jpg',
   '/images/electricity.jpg',
-//   null, // payments — replace with a real image
-   '/images/payments.jpg',
-//   null, // IT management — replace with a real image
+  '/images/payments.jpg',
   '/images/it-management.jpg',
-//   null, // defense — replace with a real image
-  '/images/defense-radio.jpg',
+  '/images/defence-radio.jpg',
 ];
 
 const NUM_STRIPS = 8;
@@ -87,9 +82,9 @@ const NUM_STRIPS = 8;
           <h3 class="domain-heading">{domains[0].title}</h3>
           <p class="domain-desc">{domains[0].desc}</p>
         </div>
-        <div class="domain-scene">
+        <!-- <div class="domain-scene">
           <UtilitiesScene />
-        </div>
+        </div> -->
       </div>
 
       <div class="work-domain" data-domain="payments">
@@ -98,9 +93,9 @@ const NUM_STRIPS = 8;
           <h3 class="domain-heading">{domains[1].title}</h3>
           <p class="domain-desc">{domains[1].desc}</p>
         </div>
-        <div class="domain-scene">
+        <!-- <div class="domain-scene">
           <PaymentsScene />
-        </div>
+        </div> -->
       </div>
 
       <div class="work-domain" data-domain="it-management">
@@ -109,9 +104,9 @@ const NUM_STRIPS = 8;
           <h3 class="domain-heading">{domains[2].title}</h3>
           <p class="domain-desc">{domains[2].desc}</p>
         </div>
-        <div class="domain-scene">
+        <!-- <div class="domain-scene">
           <ITManagementScene />
-        </div>
+        </div> -->
       </div>
 
       <div class="work-domain" data-domain="defense">
@@ -120,9 +115,9 @@ const NUM_STRIPS = 8;
           <h3 class="domain-heading">{domains[3].title}</h3>
           <p class="domain-desc">{domains[3].desc}</p>
         </div>
-        <div class="domain-scene">
+        <!-- <div class="domain-scene">
           <DefenseScene />
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -168,18 +163,6 @@ const NUM_STRIPS = 8;
     will-change: opacity;
   }
 
-  .shutter-placeholder[data-shutter="3"] {
-    background: linear-gradient(145deg, #2a1810 0%, #5c3a28 40%, #8a6040 70%, #b8935a 100%);
-  }
-
-  .shutter-placeholder[data-shutter="4"] {
-    background: linear-gradient(145deg, #0a1628 0%, #152a4a 40%, #1e4d6e 70%, #287088 100%);
-  }
-
-  .shutter-placeholder[data-shutter="5"] {
-    background: linear-gradient(145deg, #101018 0%, #1a1a2e 40%, #2a2a3c 70%, #3a3a4e 100%);
-  }
-
   .shutter-veil {
     position: absolute;
     inset: 0;
@@ -198,14 +181,14 @@ const NUM_STRIPS = 8;
     inset: 0;
     z-index: 2;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     pointer-events: none;
   }
 
   .shutter-strip {
     flex: 1;
     background-color: var(--color-bg-alt);
-    transform-origin: center center;
+    transform-origin: left center;
   }
 
   /* ===== Content layers (above shutter) ===== */

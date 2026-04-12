@@ -106,3 +106,24 @@ Use the ArchitectsDaughter-Regular.ttf as the main font library (found in docs/s
 ## TBD
 
 - Stage 8: Polish + Deploy
+
+## LinkedIn 'About' Section
+
+Hi, I'm Mike Fellowes.
+
+I'm a software professional with 20+ years of experience in analysis, design and development, with a track record of delivering mission-critical systems that stand the test of time.
+
+My work straddles these domains:
+
+- Utilities — electricity, water and gas metering, revenue collection and integrations (STS/NRS/CIM/MDM/ERP/CRM).
+- Payments — point-of-sale, smart cards, NFC and prepayment platforms.
+- IT service management — enterprise platforms and portals, secure operations, CI/CD, telemetry, monitoring and ticketing.
+- Defence and radio — spectrum management and radio licensing systems for commercial and military use.
+
+I enjoy the space between the technical and the business, bringing ideas to life and delivering software that is both functional and elegant.
+
+What I ship day to day includes web, mobile and offline-capable applications; reliable APIs and databases; integrations across OLTP, billing, ERP, CRM and telemetry; and device work such as mobile NFC and smart cards.
+
+Outside of core development, I’m exploring system design patterns and building open-source AI agent skills to help optimise productivity in the agentic era.
+
+:)

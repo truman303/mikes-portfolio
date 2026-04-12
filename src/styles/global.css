@@ -26,6 +26,19 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html.lenis {
+  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
 body {
   font-family: 'Architects Daughter', cursive;
   line-height: 1.6;
@@ -60,6 +73,7 @@ a:hover {
   /* Light mode — warm paper feel */
   --color-bg: #faf6f0;
   --color-bg-alt: #f0ebe3;
+  --color-bg-alt-rgb: 240, 235, 227;
   --color-text: #2c2c2c;
   --color-text-muted: #6b6560;
   --color-accent: #d35233;
@@ -97,6 +111,7 @@ a:hover {
 [data-theme='dark'] {
   --color-bg: #1a1a1e;
   --color-bg-alt: #242428;
+  --color-bg-alt-rgb: 36, 36, 40;
   --color-text: #e8e4df;
   --color-text-muted: #9a958f;
   --color-accent: #e8754a;

@@ -1,3 +1,4 @@
+import './smooth-scroll';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 

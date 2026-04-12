@@ -1,3 +1,4 @@
+import './smooth-scroll';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -12,6 +13,19 @@ function initWorkScroll() {
   if (numDomains === 0) return;
 
   const dots = gsap.utils.toArray<HTMLElement>('.work-progress-dot');
+  const shutterImages = gsap.utils.toArray<HTMLElement>('.shutter-image');
+  const shutterStrips = gsap.utils.toArray<HTMLElement>('.shutter-strip');
+  const hasShutter = shutterImages.length > 0 && shutterStrips.length > 0;
+
+  const DOMAIN_UNITS = [1, 1, 1, 1];
+  const domainStarts: number[] = [];
+  const domainEnds: number[] = [];
+  let totalUnits = 0;
+  DOMAIN_UNITS.forEach((units) => {
+    domainStarts.push(totalUnits);
+    totalUnits += units;
+    domainEnds.push(totalUnits);
+  });
 
   const mm = gsap.matchMedia();
 
@@ -38,7 +52,6 @@ function initWorkScroll() {
       domains.forEach((domain, i) => {
         const title = domain.querySelector('.domain-title-wrap') as HTMLElement;
         const scene = domain.querySelector('.domain-scene') as HTMLElement;
-
         if (i === 0) {
           gsap.set(title, { y: 0, autoAlpha: 1 });
           gsap.set(scene, { autoAlpha: 1 });
@@ -48,20 +61,33 @@ function initWorkScroll() {
         }
       });
 
+      if (hasShutter) {
+        shutterImages.forEach((img, i) => {
+          gsap.set(img, { autoAlpha: i === 0 ? 1 : 0 });
+        });
+        shutterStrips.forEach((strip) => {
+          gsap.set(strip, { scaleX: 0 });
+        });
+      }
+
       if (dots[0]) dots[0].classList.add('is-active');
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: () => '+=' + numDomains * window.innerHeight,
+          end: () => '+=' + totalUnits * window.innerHeight,
           pin: true,
           scrub: 0.5,
           onUpdate: (self) => {
-            const active = Math.min(
-              numDomains - 1,
-              Math.floor(self.progress * numDomains),
-            );
+            const p = self.progress * totalUnits;
+            let active = 0;
+            for (let d = domainStarts.length - 1; d >= 0; d--) {
+              if (p >= domainStarts[d]) {
+                active = d;
+                break;
+              }
+            }
             dots.forEach((dot, idx) => {
               dot.classList.toggle('is-active', idx === active);
             });
@@ -69,40 +95,65 @@ function initWorkScroll() {
         },
       });
 
-      const transition = 0.25;
+      // --- Shutter image transitions at domain boundaries (left-to-right) ---
+      if (hasShutter) {
+        const STRIP_DUR = 0.12;
+        const STAGGER_CFG = { each: 0.012, from: 'start' as const };
+
+        for (let d = 1; d < numDomains; d++) {
+          const boundary = domainEnds[d - 1];
+          const fromIdx = d - 1;
+          const toIdx = d;
+          if (toIdx >= shutterImages.length) break;
+
+          tl.to(shutterStrips, {
+            scaleX: 1,
+            duration: STRIP_DUR,
+            stagger: STAGGER_CFG,
+            ease: 'power3.inOut',
+          }, boundary - 0.2);
+
+          tl.set(shutterImages[fromIdx], { autoAlpha: 0 }, boundary);
+          tl.set(shutterImages[toIdx], { autoAlpha: 1 }, boundary);
+
+          tl.to(shutterStrips, {
+            scaleX: 0,
+            duration: STRIP_DUR,
+            stagger: STAGGER_CFG,
+            ease: 'power3.inOut',
+          }, boundary + 0.02);
+        }
+      }
+
+      // --- Domain content transitions ---
+      const dt = 0.25;
 
       domains.forEach((domain, i) => {
         const title = domain.querySelector('.domain-title-wrap') as HTMLElement;
         const scene = domain.querySelector('.domain-scene') as HTMLElement;
 
         if (i < numDomains - 1) {
-          tl.to(
-            title,
-            { y: -80, autoAlpha: 0, duration: transition, ease: 'power2.in' },
-            i + 1 - transition,
-          );
-          tl.to(
-            scene,
-            { autoAlpha: 0, duration: transition, ease: 'power2.in' },
-            i + 1 - transition,
-          );
+          const fadeOutAt = domainEnds[i];
+          tl.to(title, {
+            y: -60, autoAlpha: 0, duration: dt, ease: 'power2.in',
+          }, fadeOutAt - dt);
+          tl.to(scene, {
+            autoAlpha: 0, duration: dt, ease: 'power2.in',
+          }, fadeOutAt - dt);
         }
 
         if (i > 0) {
-          tl.to(
-            title,
-            { y: 0, autoAlpha: 1, duration: transition, ease: 'power2.out' },
-            i - transition,
-          );
-          tl.to(
-            scene,
-            { autoAlpha: 1, duration: transition, ease: 'power2.out' },
-            i - transition,
-          );
+          const fadeInAt = domainStarts[i];
+          tl.to(title, {
+            y: 0, autoAlpha: 1, duration: dt, ease: 'power2.out',
+          }, fadeInAt);
+          tl.to(scene, {
+            autoAlpha: 1, duration: dt, ease: 'power2.out',
+          }, fadeInAt);
         }
       });
 
-      tl.set({}, {}, numDomains);
+      tl.set({}, {}, totalUnits);
 
       return () => {
         dots.forEach((dot) => dot.classList.remove('is-active'));

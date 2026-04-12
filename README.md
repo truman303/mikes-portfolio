@@ -125,3 +125,5 @@ I enjoy the space between the technical and the business, bringing ideas to life
 What I ship day to day includes web, mobile and offline-capable applications; reliable APIs and databases; integrations across OLTP, billing, ERP, CRM and telemetry; and device work such as mobile NFC and smart cards.
 
 Outside of core development, I’m exploring system design patterns and building open-source AI agent skills to help optimise productivity in the agentic era.
+
+:)

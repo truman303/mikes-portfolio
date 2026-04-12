@@ -6,12 +6,6 @@ import DefenseScene from '../svg/scenes/DefenseScene.astro';
 import AgentSkillsScene from '../svg/scenes/AgentSkillsScene.astro';
 
 const domains = [
-//   {
-//     id: 'utilities',
-//     num: '01',
-//     title: 'Utilities',
-//     desc: 'Electricity, water & gas metering, system integrations and the infrastructure that connect them all - HSM/STS/NRS/CIM/MDM.',
-//   },
   {
     id: 'utilities',
     num: '01',
@@ -35,18 +29,40 @@ const domains = [
     num: '04',
     title: 'Defense & Radio',
     desc: 'Radio spectrum management, electronic warfare systems & licensing infrastructure — securing the airwaves.',
-  }
-//   {
-//     id: 'agent-skills',
-//     num: '05',
-//     title: 'Agent Skills',
-//     desc: 'Open-source AI agent skills — hand-crafted tools built to help developers and teams work smarter.',
-//   },
+  },
 ];
+
+const shutterImages: (string | null)[] = [
+  '/images/pexels-pixabay-266896.jpg',
+  '/images/view-clear-water-with-splash-effect.jpg',
+  '/images/warm-filament-bulbs-cast-cozy-amber-glow-dimly-lit-room.jpg',
+  null, // payments — replace with a real image
+  null, // IT management — replace with a real image
+  null, // defense — replace with a real image
+];
+
+const NUM_STRIPS = 8;
 ---
 
 <section id="work" class="section work-section">
   <div class="work-pinned">
+
+    <div class="work-shutter-bg" aria-hidden="true">
+      {shutterImages.map((src, i) => (
+        <div
+          class:list={['shutter-image', { 'shutter-placeholder': !src }]}
+          data-shutter={i}
+          style={src ? `background-image: url('${src}')` : undefined}
+        />
+      ))}
+      <div class="shutter-veil" />
+      <div class="shutter-strips">
+        {Array.from({ length: NUM_STRIPS }).map(() => (
+          <div class="shutter-strip" />
+        ))}
+      </div>
+    </div>
+
     <div class="work-header">
       <div class="container">
         <h2 class="section-title work-title">Work</h2>
@@ -105,18 +121,6 @@ const domains = [
           <DefenseScene />
         </div>
       </div>
-
-      <!-- <div class="work-domain" data-domain="agent-skills">
-        <div class="domain-title-wrap">
-          <span class="domain-num">{domains[4].num}</span>
-          <h3 class="domain-heading">{domains[4].title}</h3>
-          <p class="domain-desc">{domains[4].desc}</p>
-        </div>
-        <div class="domain-scene">
-          <AgentSkillsScene />
-        </div>
-      </div> -->
-
     </div>
   </div>
 </section>
@@ -126,6 +130,8 @@ const domains = [
 </script>
 
 <style>
+  /* ===== Section shell ===== */
+
   .work-section {
     position: relative;
     padding: 0;
@@ -138,14 +144,75 @@ const domains = [
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    position: relative;
   }
 
-  /* --- Header row --- */
+  /* ===== Shutter background layer ===== */
+
+  .work-shutter-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    display: none;
+  }
+
+  .shutter-image {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    will-change: opacity;
+  }
+
+  .shutter-placeholder[data-shutter="3"] {
+    background: linear-gradient(145deg, #2a1810 0%, #5c3a28 40%, #8a6040 70%, #b8935a 100%);
+  }
+
+  .shutter-placeholder[data-shutter="4"] {
+    background: linear-gradient(145deg, #0a1628 0%, #152a4a 40%, #1e4d6e 70%, #287088 100%);
+  }
+
+  .shutter-placeholder[data-shutter="5"] {
+    background: linear-gradient(145deg, #101018 0%, #1a1a2e 40%, #2a2a3c 70%, #3a3a4e 100%);
+  }
+
+  .shutter-veil {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      to right,
+      rgba(var(--color-bg-alt-rgb), 0.88) 0%,
+      rgba(var(--color-bg-alt-rgb), 0.65) 38%,
+      rgba(var(--color-bg-alt-rgb), 0.30) 100%
+    );
+  }
+
+  .shutter-strips {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+  }
+
+  .shutter-strip {
+    flex: 1;
+    background-color: var(--color-bg-alt);
+    transform-origin: center center;
+  }
+
+  /* ===== Content layers (above shutter) ===== */
 
   .work-header {
     padding-top: calc(var(--header-height) + var(--space-lg));
     padding-bottom: var(--space-sm);
     flex-shrink: 0;
+    position: relative;
+    z-index: 1;
   }
 
   .work-header .container {
@@ -164,7 +231,7 @@ const domains = [
     margin-top: var(--space-xs);
   }
 
-  /* --- Progress dots --- */
+  /* ===== Progress dots ===== */
 
   .work-progress {
     display: flex;
@@ -187,15 +254,16 @@ const domains = [
     transform: scale(1.35);
   }
 
-  /* --- Stage area --- */
+  /* ===== Stage area ===== */
 
   .work-stage {
     flex: 1;
     position: relative;
     min-height: 0;
+    z-index: 1;
   }
 
-  /* --- Domain panels (desktop: overlapping, mobile: stacked) --- */
+  /* ===== Domain panels ===== */
 
   .work-domain {
     position: absolute;
@@ -246,7 +314,7 @@ const domains = [
     height: auto;
   }
 
-  /* --- Sketch divider below header --- */
+  /* ===== Sketch divider ===== */
 
   .work-header::after {
     content: '';
@@ -260,7 +328,19 @@ const domains = [
     border-radius: 1px;
   }
 
-  /* --- Mobile / reduced-motion fallback --- */
+  /* ===== Desktop with motion: enable shutter bg ===== */
+
+  @media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
+    .work-section {
+      background-color: transparent;
+    }
+
+    .work-shutter-bg {
+      display: block;
+    }
+  }
+
+  /* ===== Mobile fallback ===== */
 
   @media (max-width: 768px) {
     .work-pinned {
@@ -305,6 +385,8 @@ const domains = [
       margin-left: 0;
     }
   }
+
+  /* ===== Reduced-motion fallback (desktop) ===== */
 
   @media (prefers-reduced-motion: reduce) and (min-width: 769px) {
     .work-pinned {
